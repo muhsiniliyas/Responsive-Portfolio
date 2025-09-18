@@ -7,6 +7,13 @@
     <link rel="stylesheet" href="style.css">
     <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
     <link href='https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css' rel='stylesheet'>
+    <!-- EmailJS SDK -->
+  <script src="https://cdn.jsdelivr.net/npm/@emailjs/browser@4/dist/email.min.js"></script>
+  <script>
+    (function() {
+      emailjs.init("Zp6mhYCWTXR98amaq"); // Your Public Key
+    })();
+  </script>
 </head>
 <body>
     <!-- Navigation -->
@@ -351,8 +358,26 @@
     </button>
 
     <script src="script.js"></script>
+     <script>
+    // Handle form submit with EmailJS
+    document.getElementById("contactForm").addEventListener("submit", function(e) {
+      e.preventDefault();
+
+      emailjs.sendForm("service_o58a8mi", "template_yu2wsoh", this)
+        .then(function() {
+          document.getElementById("formMessage").style.color = "green";
+          document.getElementById("formMessage").innerText = "✅ Message sent successfully!";
+          document.getElementById("contactForm").reset();
+        }, function(error) {
+          document.getElementById("formMessage").style.color = "red";
+          document.getElementById("formMessage").innerText = "❌ Failed to send message. Please try again!";
+          console.error("EmailJS Error:", error);
+        });
+    });
+  </script>
 </body>
 </html>
+
 
 
 
